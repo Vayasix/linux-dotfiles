@@ -1,0 +1,86 @@
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim Latex  
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:latex_fold_enabled = 0
+
+"=========== vim Latex ==============================
+" http://adragoona.hatenablog.com/entry/2014/11/26/203044
+
+NeoBundle 'vim-latex/vim-latex'
+
+filetype plugin on
+let tex_flavor = 'latex'
+set grepprg=grep\ -nH\ $*
+set shellslash
+let g:Tex_DefaultTargetFormat = 'pdf' 
+let g:Tex_CompileRule_dvi = 'platex --interaction=nonstopmode $*'
+let g:Tex_CompileRule_pdf = 'dvipdfmx $*.dvi'
+let g:Tex_FormatDependency_pdf = 'dvi,pdf'
+
+"=========== vimtex (Using this mainly) ==============================
+NeoBundle 'lervag/vimtex'
+
+augroup MyAutoCmd
+  autocmd!
+augroup END
+
+let g:latex_latexmk_enabled = 1
+let g:latex_latexmk_options = '-pdfdvi'
+
+let g:latex_view_method = 'general'
+"let g:latex_view_general_viewer = 'open'
+"let g:latex_view_general_viewer = 'mupdf'
+let g:latex_view_general_viewer = '$HOME/Applications/Skim.app/Contents/MacOS/Skim'
+
+" 自動コンパイル
+let g:latex_latexmk_continuous = 1
+let g:latex_latexmk_background = 1
+" コンパイル終了後のエラー通知オフ
+let g:latex_latexmk_callback = 0
+
+let g:latex_toc_split_pos = "topleft"
+let g:latex_toc_width = 10
+
+" SyncTex
+function! s:syncTexForward()
+  call system('$HOME/Applications/Skim.app/Contents/SharedSupport/displayline -g '
+    \ . line(".") . " "
+    \ . g:latex#data[b:latex.id].out() . " "
+    \ . expand('%:p'))
+endfunction
+
+" Preview
+function! s:previewTex() range
+    let l:tmp = @@
+    silent normal gvy
+    let l:selected = split(@@, "\n")
+    let @@ = l:tmp
+
+    let l:template1 = ["\\documentclass[a4paper]{jsarticle}",
+                      \"\\usepackage[dvipdfmx]{graphicx}",
+                      \"\\usepackage{amsmath,amssymb,bm}",
+                      \"\\pagestyle{empty}",
+                      \"\\begin{document}"]
+    let l:template2 = ["\\end{document}"]
+
+    let l:output_file = "preview.tex"
+    call writefile(extend(extend(l:template1, l:selected), template2), l:output_file)
+    silent call system("latexmk -pdfdvi preview &")
+endfunction
+
+autocmd MyAutoCmd FileType tex
+    \   nnoremap <buffer> <Space>la :call latex#motion#next_section(0,1,0)<CR>v:call latex#motion#next_section(0,0,1)<CR>:call <SID>previewTex()<CR>
+    \ | vnoremap <buffer> <Space>la :call <SID>previewTex()<CR>
+    \ | nnoremap <buffer> <Space>ls :call <SID>syncTexForward()<CR>
+
+" for neocomplete
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+endif
+let g:neocomplete#sources#omni#input_patterns.tex = '\\ref{\s*[0-9A-Za-z_:]*'
+"\citeも自動補完するなら
+"let g:neocomplete#sources#omni#input_patterns.tex = '\\cite{\s*[0-9A-Za-z_:]*\|\\ref{\s*[0-9A-Za-z_:]*'
+
+
+"latex template file
+autocmd BufNewFile *.tex 0r $HOME/.vim/template/tex.tex
