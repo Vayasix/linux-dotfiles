@@ -4,3 +4,4 @@ ln -sf ~/linux_dotfiles/.vimrc.local ~/.vimrc.local
 ln -sf ~/linux_dotfiles/.latexmkrc ~/.latexmkrc
 #ln -sf ~/linux_dotfiles/.vimrc.local.bundles ~/.vimrc.local.bundles
 ln -sf ~/linux_dotfiles/.zshrc ~/.zshrc
+ln -sf ~/linux_dotfiles/.tmux.conf ~/.tmux.conf
