@@ -6,7 +6,6 @@ let g:latex_fold_enabled = 0
 "=========== vim Latex ==============================
 " http://adragoona.hatenablog.com/entry/2014/11/26/203044
 
-NeoBundle 'vim-latex/vim-latex'
 
 filetype plugin on
 let tex_flavor = 'latex'
@@ -18,7 +17,6 @@ let g:Tex_CompileRule_pdf = 'dvipdfmx $*.dvi'
 let g:Tex_FormatDependency_pdf = 'dvi,pdf'
 
 "=========== vimtex (Using this mainly) ==============================
-NeoBundle 'lervag/vimtex'
 
 augroup MyAutoCmd
   autocmd!

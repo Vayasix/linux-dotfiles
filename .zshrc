@@ -34,11 +34,11 @@ fi
 #export PATH="$HOME/anaconda/bin:$PATH"
 
 # gnu gcc
-export PATH="/usr/gcc_4_9/bin:$PATH"
-export LD_LIBRARY_PATH="/usr/gcc_4_9/lib:/usr/gcc_4_9/lib64:$LD_LIBRARY_PATH"
-export LIBRARY_PATH="/usr/lib/x86_64-linux-gnu/:$LIBRARY_PATH"
-export C_INCLUDE_PATH="/usr/include/x86_64-linux-gnu:$C_INCLUDE_PATH"
-export CPLUS_INCLUDE_PATH="/usr/include/x86_64-linux-gnu:$CPLUS_INCLUDE_PATH"
+export PATH="$PATH:/usr/gcc_4_9/bin"
+export LD_LIBRARY_PATH="/usr/gcc_4_9/lib:/usr/gcc_4_9/lib64"
+export LIBRARY_PATH="/usr/lib/x86_64-linux-gnu/"
+export C_INCLUDE_PATH="/usr/include/x86_64-linux-gnu"
+export CPLUS_INCLUDE_PATH="/usr/include/x86_64-linux-gnu"
 
 alias gcc='gcc-4.9.3'
 alias g++='g++-4.9.3'
@@ -97,7 +97,8 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' # 補完時に大文字小�
 # ZSH_THEME="random" <-- change everytime
 #ZSH_THEME="robbyrussell"
 #ZSH_THEME="blinks"
-ZSH_THEME="af-magic"
+#ZSH_THEME="af-magic"
+ZSH_THEME="norm"
 
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
