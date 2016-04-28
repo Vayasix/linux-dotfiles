@@ -14,6 +14,7 @@ call dein#add('Shougo/vimproc.vim') "acync-proceccing
 call dein#add('Shougo/neocomplete.vim') "completion
 call dein#add('Shougo/neomru.vim') "save file history
 call dein#add('Shougo/neosnippet')
+call dein#add('Shougo/neosnippet-snippets')
 call dein#add('Shougo/unite.vim') "file opener, manager
 call dein#add('tomasr/molokai')
 call dein#add('LeafCage/yankround.vim') " save yank history
@@ -23,6 +24,7 @@ call dein#add('scrooloose/nerdtree') "編集中のファイルを一覧表示
 call dein#add('tomtom/tcomment_vim') " comment ON/OFF
 call dein#add('vim-scripts/AnsiEsc.vim') "coloring log files
 call dein#add('tyru/caw.vim') "comment out
+call dein#add('KabbAmine/zeavim.vim') 
 call dein#add('vim-latex/vim-latex')
 call dein#add('lervag/vimtex')
 
@@ -94,9 +96,20 @@ vmap \C <Plug>(caw:I:uncomment)
 
 
 " latex setting
-if filereadable(expand('~/.vimrc.local'))
-    source ~/.vimrc.local
-endif
+"if filereadable(expand('~/.vimrc.local'))
+"    source ~/.vimrc.local
+"endif
+"=========== vim Latex ==============================
+" http://adragoona.hatenablog.com/entry/2014/11/26/203044
+
+filetype plugin on
+let tex_flavor = 'latex'
+set grepprg=grep\ -nH\ $*
+set shellslash
+let g:Tex_DefaultTargetFormat = 'pdf' 
+let g:Tex_CompileRule_dvi = 'platex --interaction=nonstopmode $*'
+let g:Tex_CompileRule_pdf = 'dvipdfmx $*.dvi'
+let g:Tex_FormatDependency_pdf = 'dvi,pdf'
 
 
 "*************************************************************
@@ -153,6 +166,15 @@ if has("autocmd")
     \ endif
 endif
 
+
+" Zeal
+"<leader>z (NORMAL mode): Search for word under cursor with the docset defined automatically+.
+"gz{motion} Visual mode): Search for a motion with the docset defined automatically+.
+"<leader><leader>z :Narrow search with a docset+ and a query (A default docset is provided).
+"nmap gzz <Plug>Zeavim
+"vmap gzz <Plug>ZVVisSelection 
+"nmap gz <Plug>ZVMotion         " gz{motion} (NORMAL mode)
+"nmap gZ <Plug>ZVKeyDocset      " <leader><leader>z
 
 "*************************************************************
 "" Visual Settings

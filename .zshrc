@@ -13,23 +13,6 @@ export ZSH=$HOME/.oh-my-zsh
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
-#anyenv (12/25, 2015) 
-
-if [ -d $HOME/.anyenv ] ; then
-    export PATH="$HOME/.anyenv/bin:$PATH"
-    eval "$(anyenv init -)"
-    #path to shims
-    for env in `ls $HOME/.anyenv/envs`
-    do
-        export PATH="$HOME/.anyenv/envs/$env/shims:$PATH"
-        for ver in `ls $HOME/.anyenv/envs/$env/versions`
-            do
-                export PATH="$HOME/.anyenv/envs/$env/versions/$ver/bin:$PATH"
-            done
-    done
-    
-fi
-
 #anaconda
 #export PATH="$HOME/anaconda/bin:$PATH"
 
@@ -54,18 +37,6 @@ alias ll='ls -l'
 alias rm='rm -i'
 alias mv='mv -i'
 alias cp='cp -i'
-
-# 現在 mongodb と redisを自動起動する設定にしている 
-#mongo server起動
-#alias mongodrun='mongod --fork --config /usr/local/etc/mongod.conf &'
-#alias mongodon='mongod --dbpath /usr/local/var/db/mongo --journal'
-#alias mongodrepair='mongod --dbpath /usr/local/var/db/mongo --repair'
-
-#mongo 起動確認
-#ps -ef | grep mongod
-
-#redis 停止
-#alias redisoff='launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.redis.plist'
 
 #-------------------------- /alias -----------------------------------
 
@@ -124,6 +95,12 @@ source $ZSH/oh-my-zsh.sh
 
 # ------------------ /oh-my-zsh setting ------------------------------
 
-#remote file editing
-#vim scp://ユーザ名@リモートホスト(IPアドレス)//編集対象のファイル
-export xsrv="lifexme@lifexme.xsrv.jp:10022//home/lifexme"
+# ----- tmux setting ----------
+# autoload -Uz add-zsh-hook
+# function tmux_ssh_preexec(){
+#     local command=$1
+#     if [[ "$command" = *ssh* ]]; then
+#         tmux setenv TMUX_SSH_CMD_$(tmux display -p "#I") $command
+#     fi
+# }
+# add-zsh-hook preexec tmux_ssh_preexec
