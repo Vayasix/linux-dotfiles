@@ -13,15 +13,18 @@ export ZSH=$HOME/.oh-my-zsh
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
-#anaconda
-#export PATH="$HOME/anaconda/bin:$PATH"
+# added by Anaconda2 4.0.0 installer
+export PATH="/home/hiroki/anaconda2/bin:$PATH"
 
 # gnu gcc
 export PATH="$PATH:/usr/gcc_4_9/bin"
 export LD_LIBRARY_PATH="/usr/gcc_4_9/lib:/usr/gcc_4_9/lib64"
-export LIBRARY_PATH="/usr/lib/x86_64-linux-gnu/"
-export C_INCLUDE_PATH="/usr/include/x86_64-linux-gnu"
-export CPLUS_INCLUDE_PATH="/usr/include/x86_64-linux-gnu"
+#export LIBRARY_PATH="/usr/lib/x86_64-linux-gnu/"
+export LIBRARY_PATH="/usr/lib/"
+#export C_INCLUDE_PATH="/usr/include/x86_64-linux-gnu"
+export C_INCLUDE_PATH="/usr/include/"
+#export CPLUS_INCLUDE_PATH="/usr/include/x86_64-linux-gnu"
+export CPLUS_INCLUDE_PATH="/usr/include/"
 
 alias gcc='gcc-4.9.3'
 alias g++='g++-4.9.3'
